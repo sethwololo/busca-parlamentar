@@ -1,10 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
 
-interface FormProps {
-  hasError: boolean;
-}
-
 const appearFromLeft = keyframes`
   from {
     opacity: 0;
@@ -31,7 +27,7 @@ export const Title = styled.h1`
 
 export const Filters = styled.div`
   margin-top: 40px;
-  max-width: 700px;
+  max-width: 100%;
   display: flex;
 
   select {
@@ -40,18 +36,23 @@ export const Filters = styled.div`
     padding: 0 15px;
     border: 0;
     border-radius: 5px;
+    max-width: 50%;
     color: #3a3a3a;
     border: 2px solid #fff;
 
     & + select {
       margin-left: 10px;
     }
+
+    option {
+      text-align: center;
+    }
   }
 `;
 
 export const Searchbar = styled.div`
   margin-top: 10px;
-  max-width: 700px;
+  max-width: 100%;
   display: flex;
 
   input {
@@ -85,9 +86,12 @@ export const Searchbar = styled.div`
 `;
 
 export const Senators = styled.div`
-  max-width: 700px;
-
+  max-width: 960px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-gap: 20px;
   a {
+    max-width: 50%;
     background: #fff;
     border-radius: 5px;
     width: 100%;
@@ -98,12 +102,8 @@ export const Senators = styled.div`
     align-items: center;
     transition: transform 0.2s;
 
-    > & + a {
-      margin-top: 20px;
-    }
-
     &:hover {
-      transform: translateX(10px);
+      transform: translateY(-5px);
     }
 
     img {
@@ -130,14 +130,9 @@ export const Senators = styled.div`
         }
       }
     }
-
-    svg {
+    p + svg {
       margin-left: auto;
       color: #cbcbd6;
     }
-  }
-
-  & + div {
-    margin-top: 10px;
   }
 `;

@@ -1,0 +1,64 @@
+{
+  "partidos": [
+    {
+      "sigla": "AVANTE",
+      "nome": "Avante"
+    },
+    {
+      "sigla": "CIDADANIA",
+      "nome": "Cidadania"
+    },
+    {
+      "sigla": "DC",
+      "nome": "Democracia Cristã"
+    },
+    {
+      "sigla": "DEM",
+      "nome": "Democratas"
+    },
+    {
+      "sigla": "MDB",
+      "nome": "Movimento Democrático Brasileiro"
+    },
+    {
+      "sigla": "NOVO",
+      "nome": "Partido Novo"
+    },
+    {
+      "sigla": "PATRI",
+      "nome": "Patriota"
+    },
+    {
+      "sigla": "PATRIOTA",
+      "nome": "Patriota"
+    },
+    {
+      "sigla": "PCB",
+      "nome": "Partido Constitucionalista Brasileiro"
+    },
+    {
+      "sigla": "PCdoB",
+      "nome": "Partido Comunista do Brasil"
+    },
+    {
+      "sigla": "PCO",
+      "nome": "Partido da Causa Operária"
+    },
+    {
+      "sigla": "PDT",
+      "nome": "Partido Democrático Trabalhista"
+    },
+    {
+      "sigla": "PHS",
+      "nome": "Partido Humanista da Solidariedade"
+    },
+    {
+      "sigla": "PL",
+      "nome": "Partido Liberal"
+    },
+    {
+      "sigla": "PMB",
+      "nome": "Partido da Mulher Brasileira"
+    }
+  ]
+}

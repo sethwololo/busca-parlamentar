@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-const api = axios.create({
-  baseURL: 'http://legis.senado.leg.br/dadosabertos/senador/',
+export const apiSenado = axios.create({
+  baseURL: 'http://legis.senado.leg.br/dadosabertos/',
 });
 
-export default api;
+export const apiPartidos = axios.create({
+  baseURL: 'https://dadosabertos.camara.leg.br/api/v2/partidos',
+});
