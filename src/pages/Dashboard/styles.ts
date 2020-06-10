@@ -1,11 +1,24 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
 
 interface FormProps {
   hasError: boolean;
 }
 
-export const Container = styled.div``;
+const appearFromLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+export const Container = styled.div`
+  animation: ${appearFromLeft} 1s;
+`;
 
 export const Title = styled.h1`
   font-size: 36px;
