@@ -12,11 +12,13 @@ export default createGlobalStyle`
     background: #F0F0F5;
     color: #3a3a3a;
     -webkit-font-smoothing: antialiased;
+    -webkit-appearance: none;
   }
 
   body, input, button, select {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
+    -webkit-appearance: none;
   }
 
   #root {

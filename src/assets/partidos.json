@@ -1,64 +1,84 @@
 {
-  "partidos": [
-    {
-      "sigla": "AVANTE",
-      "nome": "Avante"
-    },
-    {
-      "sigla": "CIDADANIA",
-      "nome": "Cidadania"
-    },
-    {
-      "sigla": "DC",
-      "nome": "Democracia Cristã"
-    },
-    {
-      "sigla": "DEM",
-      "nome": "Democratas"
-    },
-    {
-      "sigla": "MDB",
-      "nome": "Movimento Democrático Brasileiro"
-    },
-    {
-      "sigla": "NOVO",
-      "nome": "Partido Novo"
-    },
-    {
-      "sigla": "PATRI",
-      "nome": "Patriota"
-    },
-    {
-      "sigla": "PATRIOTA",
-      "nome": "Patriota"
-    },
-    {
-      "sigla": "PCB",
-      "nome": "Partido Constitucionalista Brasileiro"
-    },
-    {
-      "sigla": "PCdoB",
-      "nome": "Partido Comunista do Brasil"
-    },
-    {
-      "sigla": "PCO",
-      "nome": "Partido da Causa Operária"
-    },
-    {
-      "sigla": "PDT",
-      "nome": "Partido Democrático Trabalhista"
-    },
-    {
-      "sigla": "PHS",
-      "nome": "Partido Humanista da Solidariedade"
-    },
-    {
-      "sigla": "PL",
-      "nome": "Partido Liberal"
-    },
-    {
-      "sigla": "PMB",
-      "nome": "Partido da Mulher Brasileira"
-    }
-  ]
+	"Partido": [
+		{
+			"CodigoPartido": "577",
+			"SiglaPartido": "PODEMOS",
+			"NomePartido": "Podemos"
+		},
+		{
+			"CodigoPartido": "66",
+			"SiglaPartido": "PSDB",
+			"NomePartido": "Partido da Social Democracia Brasileira"
+		},
+		{
+			"CodigoPartido": "85",
+			"SiglaPartido": "PSL",
+			"NomePartido": "Partido Social Liberal"
+		},
+		{
+			"CodigoPartido": "579",
+			"SiglaPartido": "PATRIOTA",
+			"NomePartido": "Patriota"
+		},
+		{
+			"CodigoPartido": "20",
+			"SiglaPartido": "PDT",
+			"NomePartido": "Partido Democrático Trabalhista"
+		},
+		{
+			"CodigoPartido": "41",
+			"SiglaPartido": "CIDADANIA",
+			"NomePartido": "CIDADANIA"
+		},
+		{
+			"CodigoPartido": "63",
+			"SiglaPartido": "PSB",
+			"NomePartido": "Partido Socialista Brasileiro"
+		},
+		{
+			"CodigoPartido": "565",
+			"SiglaPartido": "REDE",
+			"NomePartido": "Rede Sustentabilidade"
+		},
+		{
+			"CodigoPartido": "418",
+			"SiglaPartido": "PP",
+			"NomePartido": "Progressistas"
+		},
+		{
+			"CodigoPartido": "33",
+			"SiglaPartido": "MDB",
+			"NomePartido": "Movimento Democrático Brasileiro"
+		},
+		{
+			"CodigoPartido": "521",
+			"SiglaPartido": "REPUBLICANOS",
+			"NomePartido": "REPUBLICANOS"
+		},
+		{
+			"CodigoPartido": "523",
+			"SiglaPartido": "PL",
+			"NomePartido": "Partido Liberal"
+		},
+		{
+			"CodigoPartido": "554",
+			"SiglaPartido": "DEM",
+			"NomePartido": "Democratas"
+		},
+		{
+			"CodigoPartido": "88",
+			"SiglaPartido": "PSC",
+			"NomePartido": "Partido Social Cristão"
+		},
+		{
+			"CodigoPartido": "562",
+			"SiglaPartido": "PROS",
+			"NomePartido": "Partido Republicano da Ordem Social"
+		},
+		{
+			"CodigoPartido": "71",
+			"SiglaPartido": "PT",
+			"NomePartido": "Partido dos Trabalhadores"
+		}
+	]
 }
