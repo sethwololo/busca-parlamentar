@@ -10,13 +10,19 @@ export default createGlobalStyle`
 
   body {
     background: #F0F0F5;
-    color: #13131A;
+    color: #3a3a3a;
     -webkit-font-smoothing: antialiased;
   }
 
-  body, input, button {
+  body, input, button, select {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
+  }
+
+  #root {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 20px;
   }
 
   h1, h2, h3, h4, h5, h6, strong {
