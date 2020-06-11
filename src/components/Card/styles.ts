@@ -40,7 +40,7 @@ export const Container = styled.div`
         }
       }
     }
-    p + svg {
+    svg {
       margin-left: auto;
       color: #cbcbd6;
     }

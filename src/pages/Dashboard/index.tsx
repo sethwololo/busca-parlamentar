@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FiChevronDown } from 'react-icons/fi';
 
 import logoImg from '../../assets/logo.svg';
 import estados from '../../assets/estados.json';
@@ -42,33 +43,40 @@ const Dashboard: React.FC = () => {
         <img src={logoImg} alt="Busca Parlamentar" />
 
         <Filters>
-          <select
-            name="estado"
-            defaultValue="Estado"
-            onChange={e => setUf(e.target.value)}
-          >
-            <option disabled>Estado</option>
-            <option value="">Todos</option>
-            {estados.UF.map(estado => (
-              <option value={estado.sigla} key={estado.sigla}>
-                {estado.nome}
-              </option>
-            ))}
-          </select>
+          <div>
+            <select
+              name="estado"
+              defaultValue="Estado"
+              onChange={e => setUf(e.target.value)}
+            >
+              <option disabled>Estado</option>
+              <option value="">Todos</option>
+              {estados.UF.map(estado => (
+                <option value={estado.sigla} key={estado.sigla}>
+                  {estado.nome}
+                </option>
+              ))}
+            </select>
+          </div>
 
-          <select
-            name="partido"
-            defaultValue="Partido"
-            onChange={e => setParty(e.target.value)}
-          >
-            <option disabled>Partido</option>
-            <option value="">Todos</option>
-            {partidos.Partido.map(partido => (
-              <option value={partido.SiglaPartido} key={partido.CodigoPartido}>
-                {`${partido.SiglaPartido} - ${partido.NomePartido}`}
-              </option>
-            ))}
-          </select>
+          <div>
+            <select
+              name="partido"
+              defaultValue="Partido"
+              onChange={e => setParty(e.target.value)}
+            >
+              <option disabled>Partido</option>
+              <option value="">Todos</option>
+              {partidos.Partido.map(partido => (
+                <option
+                  value={partido.SiglaPartido}
+                  key={partido.CodigoPartido}
+                >
+                  {`${partido.SiglaPartido} - ${partido.NomePartido}`}
+                </option>
+              ))}
+            </select>
+          </div>
         </Filters>
         <Searchbar
           placeholder="Nome do parlamentar"

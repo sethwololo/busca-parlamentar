@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FiChevronRight } from 'react-icons/fi';
 
 import { Container } from './styles';
 
@@ -13,7 +14,7 @@ interface ICardProps {
 
 const Card: React.FC<ICardProps> = ({ id, photoUrl, name, uf, party }) => (
   <Container>
-    <Link key={id} to={id}>
+    <Link key={id} to={`/senador/${id}`}>
       <img src={photoUrl} alt="Imagem do Senador" />
       <div>
         <strong>{name}</strong>
@@ -26,6 +27,7 @@ const Card: React.FC<ICardProps> = ({ id, photoUrl, name, uf, party }) => (
           {party}
         </p>
       </div>
+      <FiChevronRight size={22} />
     </Link>
   </Container>
 );

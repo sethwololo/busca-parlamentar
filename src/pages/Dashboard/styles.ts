@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import FiChevronDown from '../../assets/chevron-down.svg';
 
 const appearFromLeft = keyframes`
   from {
@@ -30,25 +31,26 @@ export const Title = styled.h1`
 export const Filters = styled.div`
   margin-top: 40px;
   max-width: 960px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+  grid-gap: 10px;
 
-  select {
+  div {
     flex: 1;
     height: 70px;
     padding: 0 15px;
-    border: 0;
     border-radius: 5px;
-    max-width: 50%;
     color: #3a3a3a;
-    background: #fff;
+    background: #fff url(${FiChevronDown}) no-repeat 95% 55%;
+  }
 
-    & + select {
-      margin-left: 10px;
-    }
-
-    option {
-      text-align: center;
-    }
+  select {
+    border: 0;
+    height: 70px;
+    width: 100%;
+    background: transparent;
+    overflow: hidden;
+    padding-right: 10%;
   }
 `;
 
