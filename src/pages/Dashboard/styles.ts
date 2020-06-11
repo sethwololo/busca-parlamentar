@@ -71,6 +71,7 @@ export const Searchbar = styled.input`
 `;
 
 export const Senators = styled.div`
+  animation: ${appearFromLeft} 1.5s;
   max-width: 960px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
