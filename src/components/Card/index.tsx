@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
 
@@ -12,7 +13,7 @@ interface ICardProps {
 
 const Card: React.FC<ICardProps> = ({ id, photoUrl, name, uf, party }) => (
   <Container>
-    <a key={id} href="teste">
+    <Link key={id} to={id}>
       <img src={photoUrl} alt="Imagem do Senador" />
       <div>
         <strong>{name}</strong>
@@ -25,7 +26,7 @@ const Card: React.FC<ICardProps> = ({ id, photoUrl, name, uf, party }) => (
           {party}
         </p>
       </div>
-    </a>
+    </Link>
   </Container>
 );
 

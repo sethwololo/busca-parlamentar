@@ -26,7 +26,7 @@ export const Container = styled.div`
       margin: 0 16px;
 
       > strong {
-        font-size: 26px;
+        font-size: 24px;
         color: #3d3d4d;
       }
 
