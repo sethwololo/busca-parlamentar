@@ -134,16 +134,19 @@ export const ComissionCard = styled.div`
     align-content: center;
     justify-content: space-between;
     padding: 5px auto;
-
+    margin-top: auto;
     p {
       font-size: 16px;
       color: #a8a8b3;
-      margin-top: 4px;
 
       strong {
         font-size: 18px;
         color: #3d3d4d;
       }
+    }
+
+    & + div {
+      margin-top: 0;
     }
   }
 `;

@@ -7,7 +7,7 @@ import Parlamentar from '../pages/Parlamentar';
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Dashboard} />
-    <Route path="/senador" component={Parlamentar} />
+    <Route path="/senador/:id" component={Parlamentar} />
   </Switch>
 );
 

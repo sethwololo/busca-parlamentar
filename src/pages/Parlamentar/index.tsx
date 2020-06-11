@@ -1,7 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+import React, { useEffect, useState, useCallback } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
+import { uuid } from 'uuidv4';
+
+import formatDate from '../../utils/formatDate';
 
 import logoImg from '../../assets/logo.svg';
 
@@ -13,10 +15,16 @@ import {
   Comissions,
   ComissionCard,
 } from './styles';
+import api from '../../services/api';
 
-interface IParlamentar {
+interface IRouteParams {
+  id: string;
+}
+
+interface ISenator {
   CodigoParlamentar: string;
   NomeParlamentar: string;
+  NomeCompletoParlamentar: string;
   SiglaPartidoParlamentar: string;
   UfParlamentar: string;
   UrlFotoParlamentar: string;
@@ -25,17 +33,60 @@ interface IParlamentar {
   MembroLideranca: string;
 }
 
-interface IComissao {
+interface ICommission {
   IdentificacaoComissao: {
+    CodigoComissao: string;
     NomeComissao: string;
     NomeCasaComissao: string;
   };
   DescricaoParticipacao: string;
-  DataInicio: Date;
-  DataFim: Date;
+  DataInicio: string;
+  DataFim?: string;
 }
 
 const Parlamentar: React.FC = () => {
+  const { id } = useParams<IRouteParams>();
+  const [senator, setSenator] = useState<ISenator>();
+  const [commissions, setCommissions] = useState<ICommission[]>(
+    [] as ICommission[],
+  );
+
+  useEffect(() => {
+    async function getData(): Promise<void> {
+      const senatorApi = await api.get('senador/lista/atual.json');
+      const senatorData = senatorApi.data.ListaParlamentarEmExercicio.Parlamentares.Parlamentar.filter(
+        (parlamentar: { IdentificacaoParlamentar: ISenator }) =>
+          parlamentar.IdentificacaoParlamentar.CodigoParlamentar === id,
+      );
+
+      setSenator(senatorData[0].IdentificacaoParlamentar);
+
+      const commissionApi = await api.get(`senador/${id}/comissoes.json`);
+      const commissionData =
+        commissionApi.data.MembroComissaoParlamentar.Parlamentar.MembroComissoes
+          .Comissao;
+
+      setCommissions(commissionData);
+    }
+    getData();
+  }, [id]);
+
+  const countCommissionAsHolder = useCallback(
+    () =>
+      commissions.filter(
+        commission => commission.DescricaoParticipacao === 'Titular',
+      ).length,
+    [commissions],
+  );
+
+  const countCommissionAsAlternate = useCallback(
+    () =>
+      commissions.filter(
+        commission => commission.DescricaoParticipacao === 'Suplente',
+      ).length,
+    [commissions],
+  );
+
   return (
     <Container>
       <Header>
@@ -49,71 +100,83 @@ const Parlamentar: React.FC = () => {
       <SenatorInfo>
         <header>
           <img
-            src="https://image.flaticon.com/icons/svg/147/147144.svg"
-            alt="Nome do senador"
+            src={senator?.UrlFotoParlamentar}
+            alt={`Foto de ${senator?.NomeParlamentar}`}
           />
           <div>
-            <strong>Nome do parlamentar</strong>
+            <strong>{senator?.NomeParlamentar}</strong>
             <p>
-              Nome completo do parlamentar{' '}
-              <a href="teste">
-                <strong>| Página Oficial</strong>
+              {senator?.NomeCompletoParlamentar}
+              <a href={senator?.UrlPaginaParlamentar}>
+                {' | '}
+                <strong>Página Oficial</strong>
               </a>
             </p>
           </div>
         </header>
         <ul>
           <li>
-            <strong>PODEMOS</strong>
+            <strong>{senator?.SiglaPartidoParlamentar}</strong>
             <span>Partido</span>
           </li>
           <li>
-            <strong>DF</strong>
+            <strong>{senator?.UfParlamentar}</strong>
             <span>Estado</span>
           </li>
           <li>
-            <strong>Sim</strong>
+            <strong>{senator?.MembroMesa}</strong>
             <span>Membro da Mesa</span>
           </li>
           <li>
-            <strong>Sim</strong>
+            <strong>{senator?.MembroLideranca}</strong>
             <span>Membro da Liderança</span>
           </li>
           <li>
-            <strong>20</strong>
-            <span>Comissões como Suplente</span>
+            <strong>{countCommissionAsHolder()}</strong>
+            <span>Comissões como Titular</span>
           </li>
           <li>
-            <strong>20</strong>
+            <strong>{countCommissionAsAlternate()}</strong>
             <span>Comissões como Suplente</span>
           </li>
         </ul>
       </SenatorInfo>
 
       <Title>Comissões</Title>
+
       <Comissions>
-        <ComissionCard>
-          <h2>
-            Título da Comissão longo pra testar a responsividade do layout um
-            pouco maior
-          </h2>
-          <div>
-            <p>
-              <strong>Casa: </strong>Senado Federel
-            </p>
-            <p>
-              <strong>Participação: </strong>Titular
-            </p>
-          </div>
-          <div>
-            <p>
-              <strong>Data de início: </strong>20/04/2020
-            </p>
-            <p>
-              <strong>Data de fim: </strong>20/04/2020
-            </p>
-          </div>
-        </ComissionCard>
+        {commissions.map(commission => (
+          <ComissionCard key={uuid()}>
+            <h2>{commission.IdentificacaoComissao.NomeComissao}</h2>
+            <div>
+              <p>
+                <strong>Casa: </strong>
+                {commission.IdentificacaoComissao.NomeCasaComissao}
+              </p>
+              <p>
+                <strong>Participação: </strong>
+                {commission.DescricaoParticipacao}
+              </p>
+            </div>
+            <div>
+              <p>
+                <strong>Data de início: </strong>
+                {formatDate(commission.DataInicio)}
+              </p>
+              {commission?.DataFim ? (
+                <p>
+                  <strong>Data de fim: </strong>
+                  {formatDate(commission.DataFim)}
+                </p>
+              ) : (
+                <p>
+                  <strong>Data de fim: </strong>
+                  Em aberto
+                </p>
+              )}
+            </div>
+          </ComissionCard>
+        ))}
       </Comissions>
     </Container>
   );

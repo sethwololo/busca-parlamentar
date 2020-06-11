@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { FiChevronDown } from 'react-icons/fi';
 
 import logoImg from '../../assets/logo.svg';
 import estados from '../../assets/estados.json';
@@ -20,7 +19,7 @@ interface ISenator {
 }
 
 const Dashboard: React.FC = () => {
-  const [senators, setSenators] = useState<ISenator[]>([]);
+  const [senators, setSenators] = useState<ISenator[]>([] as ISenator[]);
   const [uf, setUf] = useState('');
   const [party, setParty] = useState('');
   const [search, setSearch] = useState('');
