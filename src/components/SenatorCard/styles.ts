@@ -1,6 +1,18 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const appearFromDown = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 export const Container = styled.div`
+  animation: ${appearFromDown} 0.75s;
   a {
     background: #fff;
     border-radius: 5px;

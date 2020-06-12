@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import LazyLoad from 'react-lazyload';
+
+import SenatorCard from '../../components/SenatorCard';
 
 import logoImg from '../../assets/logo.svg';
 import estados from '../../assets/estados.json';
 import partidos from '../../assets/partidos.json';
 
 import api from '../../services/api';
-
-import Card from '../../components/Card';
 
 import { Container, Filters, Title, Searchbar, Senators } from './styles';
 
@@ -39,7 +40,9 @@ const Dashboard: React.FC = () => {
   return (
     <Container>
       <header>
-        <img src={logoImg} alt="Busca Parlamentar" />
+        <a href="/">
+          <img src={logoImg} alt="Busca Parlamentar" />
+        </a>
 
         <Filters>
           <div>
@@ -95,14 +98,16 @@ const Dashboard: React.FC = () => {
             search ? senator.NomeParlamentar.includes(search) : senator,
           )
           .map(senator => (
-            <Card
-              key={senator.CodigoParlamentar}
-              id={senator.CodigoParlamentar}
-              photoUrl={senator.UrlFotoParlamentar}
-              name={senator.NomeParlamentar}
-              uf={senator.UfParlamentar}
-              party={senator.SiglaPartidoParlamentar}
-            />
+            <LazyLoad key={senator.CodigoParlamentar} height={100}>
+              <SenatorCard
+                key={senator.CodigoParlamentar}
+                id={senator.CodigoParlamentar}
+                photoUrl={senator.UrlFotoParlamentar}
+                name={senator.NomeParlamentar}
+                uf={senator.UfParlamentar}
+                party={senator.SiglaPartidoParlamentar}
+              />
+            </LazyLoad>
           ))}
       </Senators>
     </Container>

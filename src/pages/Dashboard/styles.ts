@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 import FiChevronDown from '../../assets/chevron-down.svg';
 
-const appearFromLeft = keyframes`
+const appearFromRight = keyframes`
   from {
     opacity: 0;
     transform: translateX(50px);
@@ -13,7 +13,7 @@ const appearFromLeft = keyframes`
 `;
 
 export const Container = styled.div`
-  animation: ${appearFromLeft} 1s;
+  animation: ${appearFromRight} 1s;
 
   header {
     margin-bottom: 48px;
@@ -71,7 +71,7 @@ export const Searchbar = styled.input`
 `;
 
 export const Senators = styled.div`
-  animation: ${appearFromLeft} 1.5s;
+  animation: ${appearFromRight} 1.5s;
   max-width: 960px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
