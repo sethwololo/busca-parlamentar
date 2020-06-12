@@ -2,20 +2,16 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { uuid } from 'uuidv4';
+import LazyLoad from 'react-lazyload';
 
-import formatDate from '../../utils/formatDate';
+import CommissionCard from '../../components/CommissionCard';
+import SenatorInfo from '../../components/SenatorInfo';
 
 import logoImg from '../../assets/logo.svg';
 
-import {
-  Container,
-  Header,
-  Title,
-  SenatorInfo,
-  Comissions,
-  ComissionCard,
-} from './styles';
 import api from '../../services/api';
+
+import { Container, Header, Title, Comissions } from './styles';
 
 interface IRouteParams {
   id: string;
@@ -46,7 +42,7 @@ interface ICommission {
 
 const Parlamentar: React.FC = () => {
   const { id } = useParams<IRouteParams>();
-  const [senator, setSenator] = useState<ISenator>();
+  const [senator, setSenator] = useState<ISenator>({} as ISenator);
   const [commissions, setCommissions] = useState<ICommission[]>(
     [] as ICommission[],
   );
@@ -92,90 +88,38 @@ const Parlamentar: React.FC = () => {
       <Header>
         <img src={logoImg} alt="Busca Parlamentar" />
         <Link to="/">
-          <FiArrowLeft size={16} />
+          <FiArrowLeft size={18} />
           Voltar
         </Link>
       </Header>
 
-      <SenatorInfo>
-        <header>
-          <img
-            src={senator?.UrlFotoParlamentar}
-            alt={`Foto de ${senator?.NomeParlamentar}`}
-          />
-          <div>
-            <strong>{senator?.NomeParlamentar}</strong>
-            <p>
-              {senator?.NomeCompletoParlamentar}
-              <a href={senator?.UrlPaginaParlamentar}>
-                {' | '}
-                <strong>Página Oficial</strong>
-              </a>
-            </p>
-          </div>
-        </header>
-        <ul>
-          <li>
-            <strong>{senator?.SiglaPartidoParlamentar}</strong>
-            <span>Partido</span>
-          </li>
-          <li>
-            <strong>{senator?.UfParlamentar}</strong>
-            <span>Estado</span>
-          </li>
-          <li>
-            <strong>{senator?.MembroMesa}</strong>
-            <span>Membro da Mesa</span>
-          </li>
-          <li>
-            <strong>{senator?.MembroLideranca}</strong>
-            <span>Membro da Liderança</span>
-          </li>
-          <li>
-            <strong>{countCommissionAsHolder()}</strong>
-            <span>Comissões como Titular</span>
-          </li>
-          <li>
-            <strong>{countCommissionAsAlternate()}</strong>
-            <span>Comissões como Suplente</span>
-          </li>
-        </ul>
-      </SenatorInfo>
+      <SenatorInfo
+        photoUrl={senator?.UrlFotoParlamentar}
+        name={senator?.NomeParlamentar}
+        fullName={senator?.NomeCompletoParlamentar}
+        pageUrl={senator?.UrlPaginaParlamentar}
+        party={senator?.SiglaPartidoParlamentar}
+        uf={senator?.UfParlamentar}
+        leadershipMember={senator?.MembroLideranca}
+        tableMember={senator?.MembroMesa}
+        commissionsAsHolder={countCommissionAsHolder()}
+        commissionsAsAlternate={countCommissionAsAlternate()}
+      />
 
       <Title>Comissões</Title>
 
       <Comissions>
         {commissions.map(commission => (
-          <ComissionCard key={uuid()}>
-            <h2>{commission.IdentificacaoComissao.NomeComissao}</h2>
-            <div>
-              <p>
-                <strong>Casa: </strong>
-                {commission.IdentificacaoComissao.NomeCasaComissao}
-              </p>
-              <p>
-                <strong>Participação: </strong>
-                {commission.DescricaoParticipacao}
-              </p>
-            </div>
-            <div>
-              <p>
-                <strong>Data de início: </strong>
-                {formatDate(commission.DataInicio)}
-              </p>
-              {commission?.DataFim ? (
-                <p>
-                  <strong>Data de fim: </strong>
-                  {formatDate(commission.DataFim)}
-                </p>
-              ) : (
-                <p>
-                  <strong>Data de fim: </strong>
-                  Em aberto
-                </p>
-              )}
-            </div>
-          </ComissionCard>
+          <LazyLoad key={uuid()} height={150}>
+            <CommissionCard
+              key={uuid()}
+              name={commission.IdentificacaoComissao.NomeComissao}
+              house={commission.IdentificacaoComissao.NomeCasaComissao}
+              description={commission.DescricaoParticipacao}
+              dateStart={commission.DataInicio}
+              dateEnd={commission?.DataFim}
+            />
+          </LazyLoad>
         ))}
       </Comissions>
     </Container>

@@ -12,9 +12,15 @@ interface ICardProps {
   party: string;
 }
 
-const Card: React.FC<ICardProps> = ({ id, photoUrl, name, uf, party }) => (
+const SenatorCard: React.FC<ICardProps> = ({
+  id,
+  photoUrl,
+  name,
+  uf,
+  party,
+}) => (
   <Container>
-    <Link key={id} to={`/senador/${id}`}>
+    <Link to={`/senador/${id}`}>
       <img src={photoUrl} alt="Imagem do Senador" />
       <div>
         <strong>{name}</strong>
@@ -32,4 +38,4 @@ const Card: React.FC<ICardProps> = ({ id, photoUrl, name, uf, party }) => (
   </Container>
 );
 
-export default Card;
+export default SenatorCard;
