@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import SenatorCard from '../../components/SenatorCard';
 
@@ -13,6 +13,8 @@ import { Container, Filters, Title, Searchbar, Senators } from './styles';
 interface ISenator {
   CodigoParlamentar: string;
   NomeParlamentar: string;
+  NomeSemAcento: string;
+  NomeLowerCase: string;
   SiglaPartidoParlamentar: string;
   UfParlamentar: string;
   UrlFotoParlamentar: string;
@@ -24,17 +26,39 @@ const Dashboard: React.FC = () => {
   const [party, setParty] = useState('');
   const [search, setSearch] = useState('');
 
+  function removeAccent(text: string): string {
+    const dict: { [key: string]: string } = {
+      á: 'a',
+      à: 'a',
+      ã: 'a',
+      é: 'e',
+      ç: 'c',
+      õ: 'o',
+    };
+    const convertedText = text
+      .toLocaleLowerCase('pt-BR')
+      .replace(/[^\w ]/g, char => dict[char] || char);
+    return convertedText;
+  }
+
   useEffect(() => {
     async function getData(): Promise<void> {
       const senatorApi = await api.get('senador/lista/atual.json');
       const senatorArray = senatorApi.data.ListaParlamentarEmExercicio.Parlamentares.Parlamentar.map(
-        (parlamentar: { IdentificacaoParlamentar: ISenator }) =>
-          parlamentar.IdentificacaoParlamentar,
+        (parlamentar: { IdentificacaoParlamentar: ISenator }) => ({
+          ...parlamentar.IdentificacaoParlamentar,
+          NomeSemAcento: removeAccent(
+            parlamentar.IdentificacaoParlamentar.NomeParlamentar,
+          ),
+          NomeLowerCase: parlamentar.IdentificacaoParlamentar.NomeParlamentar.toLocaleLowerCase(
+            'pt-BR',
+          ),
+        }),
       );
-      setSenators([...senatorArray]);
+      setSenators(senatorArray);
     }
     getData();
-  }, [search, uf, party]);
+  }, []);
 
   return (
     <Container>
@@ -93,7 +117,17 @@ const Dashboard: React.FC = () => {
           )
           .filter(senator => (uf ? senator.UfParlamentar === uf : senator))
           .filter(senator =>
-            search ? senator.NomeParlamentar.includes(search) : senator,
+            search
+              ? senator.NomeSemAcento.includes(
+                  search.toLocaleLowerCase('pt-br'),
+                ) ||
+                senator.NomeParlamentar.includes(
+                  search.toLocaleLowerCase('pt-br'),
+                ) ||
+                senator.NomeLowerCase.includes(
+                  search.toLocaleLowerCase('pt-br'),
+                )
+              : senator,
           )
           .map(senator => (
             <SenatorCard
@@ -104,7 +138,7 @@ const Dashboard: React.FC = () => {
               uf={senator.UfParlamentar}
               party={senator.SiglaPartidoParlamentar}
             />
-          ))}
+          )) || <h1>teste</h1>}
       </Senators>
     </Container>
   );
