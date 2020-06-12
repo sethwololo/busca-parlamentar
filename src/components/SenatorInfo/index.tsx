@@ -34,7 +34,7 @@ const SenatorInfo: React.FC<ICardProps> = ({
         <strong>{name}</strong>
         <p>
           {fullName}
-          <a href={pageUrl}>
+          <a href={pageUrl} target="blank">
             {' | '}
             <strong>Página Oficial</strong>
           </a>
