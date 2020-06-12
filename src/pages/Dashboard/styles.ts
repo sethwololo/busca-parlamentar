@@ -16,6 +16,7 @@ export const Container = styled.div`
   animation: ${appearFromRight} 1s;
 
   header {
+    width: 100%;
     margin-bottom: 48px;
   }
 `;
@@ -50,7 +51,6 @@ export const Filters = styled.div`
     width: 100%;
     background: transparent;
     overflow: hidden;
-    padding-right: 10%;
   }
 `;
 
@@ -78,5 +78,9 @@ export const Senators = styled.div`
   grid-gap: 20px;
   @media (min-width: 768px) {
     grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
+  }
+
+  h3 {
+    animation: ${appearFromRight} 2s;
   }
 `;

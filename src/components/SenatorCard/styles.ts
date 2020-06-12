@@ -14,6 +14,7 @@ const appearFromDown = keyframes`
 export const Container = styled.div`
   animation: ${appearFromDown} 0.75s;
   a {
+    animation: ${appearFromDown} 0.75s;
     background: #fff;
     border-radius: 5px;
     width: 100%;
@@ -38,7 +39,7 @@ export const Container = styled.div`
       margin: 0 16px;
 
       > strong {
-        font-size: 24px;
+        font-size: 22px;
         color: #3d3d4d;
       }
 
