@@ -11,6 +11,11 @@
 			"NomePartido": "Partido da Social Democracia Brasileira"
 		},
 		{
+			"CodigoPartido": "55",
+			"SiglaPartido": "PSD",
+			"NomePartido": "Partido Social Democrático"
+		},
+		{
 			"CodigoPartido": "85",
 			"SiglaPartido": "PSL",
 			"NomePartido": "Partido Social Liberal"
