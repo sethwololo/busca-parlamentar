@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import LazyLoad from 'react-lazyload';
 
 import SenatorCard from '../../components/SenatorCard';
 
@@ -35,7 +34,7 @@ const Dashboard: React.FC = () => {
       setSenators([...senatorArray]);
     }
     getData();
-  }, []);
+  }, [search, uf, party]);
 
   return (
     <Container>
@@ -48,11 +47,10 @@ const Dashboard: React.FC = () => {
           <div>
             <select
               name="estado"
-              defaultValue="Estado"
+              defaultValue=""
               onChange={e => setUf(e.target.value)}
             >
-              <option disabled>Estado</option>
-              <option value="">Todos</option>
+              <option value="">Todos os estados</option>
               {estados.UF.map(estado => (
                 <option value={estado.sigla} key={estado.sigla}>
                   {estado.nome}
@@ -64,11 +62,10 @@ const Dashboard: React.FC = () => {
           <div>
             <select
               name="partido"
-              defaultValue="Partido"
+              defaultValue=""
               onChange={e => setParty(e.target.value)}
             >
-              <option disabled>Partido</option>
-              <option value="">Todos</option>
+              <option value="">Todos os Partidos</option>
               {partidos.Partido.map(partido => (
                 <option
                   value={partido.SiglaPartido}
@@ -88,6 +85,7 @@ const Dashboard: React.FC = () => {
       </header>
 
       <Title>Resultados</Title>
+
       <Senators id="senator-list">
         {senators
           .filter(senator =>
@@ -98,16 +96,14 @@ const Dashboard: React.FC = () => {
             search ? senator.NomeParlamentar.includes(search) : senator,
           )
           .map(senator => (
-            <LazyLoad key={senator.CodigoParlamentar} height={100}>
-              <SenatorCard
-                key={senator.CodigoParlamentar}
-                id={senator.CodigoParlamentar}
-                photoUrl={senator.UrlFotoParlamentar}
-                name={senator.NomeParlamentar}
-                uf={senator.UfParlamentar}
-                party={senator.SiglaPartidoParlamentar}
-              />
-            </LazyLoad>
+            <SenatorCard
+              key={senator.CodigoParlamentar}
+              id={senator.CodigoParlamentar}
+              photoUrl={senator.UrlFotoParlamentar}
+              name={senator.NomeParlamentar}
+              uf={senator.UfParlamentar}
+              party={senator.SiglaPartidoParlamentar}
+            />
           ))}
       </Senators>
     </Container>
