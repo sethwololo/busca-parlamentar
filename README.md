@@ -4,7 +4,7 @@
 
 ## Descrição
 
-Busca Parlamentar é uma aplicação que usa a API de Dados Abertos para busca e exibição de informações sobre os parlamentares do Senado Federal
+Busca Parlamentar é uma aplicação React que usa a API de Dados Abertos para busca e exibição de informações sobre os parlamentares do Senado Federal
 
 ## Funcionamento
 
