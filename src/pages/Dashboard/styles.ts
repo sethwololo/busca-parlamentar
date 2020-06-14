@@ -1,5 +1,4 @@
 import styled, { keyframes } from 'styled-components';
-import FiChevronDown from '../../assets/chevron-down.svg';
 
 const appearFromRight = keyframes`
   from {
@@ -42,7 +41,7 @@ export const Filters = styled.div`
     padding: 0 15px;
     border-radius: 5px;
     color: #3a3a3a;
-    background: #fff url(${FiChevronDown}) no-repeat 95% 55%;
+    background: #fff;
   }
 
   select {
