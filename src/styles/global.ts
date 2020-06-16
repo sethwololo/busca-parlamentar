@@ -8,6 +8,11 @@ export default createGlobalStyle`
     outline: 0;
   }
 
+  html {
+    overflow: -moz-scrollbars-vertical; 
+    overflow-y: scroll;
+  }
+
   body {
     background: #F0F0F5;
     color: #3a3a3a;
