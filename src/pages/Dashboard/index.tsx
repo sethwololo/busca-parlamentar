@@ -4,7 +4,7 @@ import SenatorCard from '../../components/SenatorCard';
 
 import logoImg from '../../assets/logo.svg';
 import estados from '../../assets/estados.json';
-import partidos from '../../assets/partidos.json';
+// import partidos from '../../assets/partidos.json';
 
 import api from '../../services/api';
 
