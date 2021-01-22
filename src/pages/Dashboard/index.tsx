@@ -44,7 +44,8 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function getData(): Promise<void> {
-      const senatorApi = await api.get('senador/lista/atual.json');
+      const senatorApi = await api.get('senador/lista/atual');
+
       const senatorArray = senatorApi.data.ListaParlamentarEmExercicio.Parlamentares.Parlamentar.map(
         (parlamentar: { IdentificacaoParlamentar: ISenator }) => ({
           ...parlamentar.IdentificacaoParlamentar,

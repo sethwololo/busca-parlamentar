@@ -49,7 +49,7 @@ const Parlamentar: React.FC = () => {
 
   useEffect(() => {
     async function getData(): Promise<void> {
-      const senatorApi = await api.get('senador/lista/atual.json');
+      const senatorApi = await api.get('senador/lista/atual');
       const senatorData = senatorApi.data.ListaParlamentarEmExercicio.Parlamentares.Parlamentar.filter(
         (parlamentar: { IdentificacaoParlamentar: ISenator }) =>
           parlamentar.IdentificacaoParlamentar.CodigoParlamentar === id,
@@ -57,7 +57,7 @@ const Parlamentar: React.FC = () => {
 
       setSenator(senatorData[0].IdentificacaoParlamentar);
 
-      const commissionApi = await api.get(`senador/${id}/comissoes.json`);
+      const commissionApi = await api.get(`senador/${id}/comissoes`);
       const commissionData =
         commissionApi.data.MembroComissaoParlamentar.Parlamentar.MembroComissoes
           .Comissao;
