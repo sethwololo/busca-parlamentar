@@ -20,12 +20,19 @@ interface ISenator {
   UrlFotoParlamentar: string;
 }
 
+interface IParty {
+  Codigo: string;
+  Nome: string;
+  Sigla: string;
+}
+
 const Dashboard: React.FC = () => {
-  const [senators, setSenators] = useState<ISenator[]>([] as ISenator[]);
+  const [senators, setSenators] = useState<ISenator[]>([]);
   const [uf, setUf] = useState('');
   const [party, setParty] = useState('');
   const [search, setSearch] = useState('');
-  const [mount, setMount] = useState(false);
+  const [parties, setParties] = useState<IParty[]>([]);
+  // const [mount, setMount] = useState(false);
 
   function removeAccent(text: string): string {
     const dict: { [key: string]: string } = {
@@ -57,11 +64,15 @@ const Dashboard: React.FC = () => {
           ),
         }),
       );
+
+      const partiesArray = await api.get('senador/partidos');
+
       setSenators(senatorArray);
+      setParties(partiesArray.data.ListaPartidos.Partidos.Partido);
     }
     getData();
-    senators.length > 0 ? setMount(true) : setMount(false);
-  }, [senators.length]);
+    // senators.length > 0 ? setMount(true) : setMount(false);
+  }, []);
 
   function filteredSenators(): ISenator[] {
     return senators
@@ -111,12 +122,9 @@ const Dashboard: React.FC = () => {
                 onChange={e => setParty(e.target.value)}
               >
                 <option value="">Todos os Partidos</option>
-                {partidos.Partido.map(partido => (
-                  <option
-                    value={partido.SiglaPartido}
-                    key={partido.CodigoPartido}
-                  >
-                    {`${partido.SiglaPartido} - ${partido.NomePartido}`}
+                {parties.map(partido => (
+                  <option value={partido.Sigla} key={partido.Codigo}>
+                    {`${partido.Sigla} - ${partido.Nome}`}
                   </option>
                 ))}
               </select>
@@ -133,7 +141,7 @@ const Dashboard: React.FC = () => {
       <Title>Resultados</Title>
 
       <Senators>
-        {mount &&
+        {senators.length > 0 &&
           (filteredSenators().length > 0 ? (
             filteredSenators().map(senator => (
               <SenatorCard

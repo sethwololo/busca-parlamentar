@@ -37,7 +37,7 @@ export const Filters = styled.div`
 
   div {
     flex: 1;
-    height: 70px;
+    height: 50px;
     padding: 0 15px;
     border-radius: 5px;
     color: #3a3a3a;
@@ -46,7 +46,7 @@ export const Filters = styled.div`
 
   select {
     border: 0;
-    height: 70px;
+    height: 50px;
     width: 100%;
     background: transparent;
     overflow: hidden;
@@ -57,7 +57,7 @@ export const Searchbar = styled.input`
   margin-top: 10px;
   max-width: 960px;
   min-width: 100%;
-  height: 70px;
+  height: 50px;
   padding: 0 15px;
   border: 0;
   border-radius: 5px;
